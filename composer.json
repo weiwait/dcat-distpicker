@@ -1,0 +1,32 @@
+{
+    "name": "weiwait/distpicker",
+    "alias": "",
+    "description": "省-市-区县级联 + 坐标拾取 学习版",
+    "type": "library",
+    "keywords": ["dcat-admin", "extension", "地区选择", "省市区", "坐标拾取"],
+    "homepage": "https://github.com/weiwait/distpicker",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "weiwait",
+            "email": "mail@weiwait.cn"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "dcat/laravel-admin": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Weiwait\\Distpicker\\": "src/"
+        }
+    },
+    "extra": {
+        "dcat-admin": "Weiwait\\Distpicker\\DistpickerServiceProvider",
+        "laravel": {
+            "providers": [
+                "Weiwait\\Distpicker\\DistpickerServiceProvider"
+            ]
+        }
+    }
+}
