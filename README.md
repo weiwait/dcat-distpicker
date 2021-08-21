@@ -21,7 +21,15 @@
     $form->distpicker(['province', 'city', 'district'], 'label')
         ->deitail('detail') // 使用地址详细
         ->coordinate(['longitude', 'latitude']) // 使用经度纬度坐标
-        ->height(500); // 设置地图高度 默认300
+        ->height(500) // 设置地图高度 默认300
+        ->disableMap() // 关闭地图
 ```
 
 ![示例图片](https://github.com/weiwait/images/blob/main/dcat-distpicker.png?raw=true)
+
+### Donate
+![示例图片](https://github.com/weiwait/images/blob/main/donate.png?raw=true)
+
+### Dcat-admin 扩展列表
+1. [单图裁剪](https://github.com/weiwait/dcat-cropper)
+2. [区划级联+坐标拾取](https://github.com/weiwait/dcat-cropper)

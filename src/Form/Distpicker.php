@@ -72,9 +72,9 @@ class Distpicker extends Field
         return $this;
     }
 
-    public function disableMap(bool $bool = true): Distpicker
+    public function disableMap(bool $disable = true): Distpicker
     {
-        $this->disableMap = $bool;
+        $this->disableMap = $disable;
 
         return $this;
     }

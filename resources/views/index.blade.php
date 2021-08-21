@@ -109,22 +109,22 @@
                 <div class="china-area-dropdown">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">纬度</span>
+                            <span class="input-group-text" id="basic-addon1">经度</span>
                         </div>
-                        <input id="{{$areaId}}-latitude" type="text" name="{{$latitudeColumn}}"
-                               value="{{$value[$latitudeColumn] ?? ''}}" class="form-control"
-                               aria-label="纬度">
+                        <input id="{{$areaId}}-longitude" type="text" name="{{$longitudeColumn}}"
+                               value="{{$value[$longitudeColumn] ?? ''}}" class="form-control"
+                               aria-label="经度">
                     </div>
                 </div>
 
                 <div class="china-area-dropdown">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">经度</span>
+                            <span class="input-group-text" id="basic-addon1">纬度</span>
                         </div>
-                        <input id="{{$areaId}}-longitude" type="text" name="{{$longitudeColumn}}"
-                               value="{{$value[$longitudeColumn] ?? ''}}" class="form-control"
-                               aria-label="经度">
+                        <input id="{{$areaId}}-latitude" type="text" name="{{$latitudeColumn}}"
+                               value="{{$value[$latitudeColumn] ?? ''}}" class="form-control"
+                               aria-label="纬度">
                     </div>
                 </div>
             @endif
