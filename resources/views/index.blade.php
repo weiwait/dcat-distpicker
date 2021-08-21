@@ -180,8 +180,8 @@
             districts = @json($districts);
             currentCities = [];
             currentDistricts = [];
-            lat = {{$value[$latitudeColumn] ?? 39.916527}};
-            lng = {{$value[$longitudeColumn] ?? 116.397128}};
+            lat = {{empty($value[$latitudeColumn]) ? 39.916527 : $value[$latitudeColumn]}};
+            lng = {{empty($value[$longitudeColumn]) ? 116.397128 : $value[$longitudeColumn]}};
             areaProxy;
 
             constructor() {
