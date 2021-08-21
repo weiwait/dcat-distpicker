@@ -4,7 +4,7 @@
     "description": "省-市-区县级联 + 坐标拾取 学习版",
     "type": "library",
     "keywords": ["dcat-admin", "extension", "地区选择", "省市区", "坐标拾取"],
-    "homepage": "https://github.com/weiwait/distpicker",
+    "homepage": "https://github.com/weiwait/dcat-distpicker",
     "license": "MIT",
     "authors": [
         {
