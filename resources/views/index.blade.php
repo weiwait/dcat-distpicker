@@ -170,7 +170,7 @@
         min-height: {{$height ?? 300}}px;
     }
 </style>
-<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77"></script>
+{{--<script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77" onload=""></script>--}}
 
 <script>
     (function (w, $) {
@@ -278,7 +278,7 @@
             }
         }
 
-        new (class extends Distpicker {
+        class Map extends Distpicker {
             marker = false;
             map;
             geo;
@@ -389,6 +389,18 @@
             getLocation() {
                 this.geo.getLocation([this.areaProxy.province.name, this.areaProxy.city.name, this.areaProxy.district.name].join())
             }
-        });
+        }
+
+        (function (src) {
+            let script = document.createElement('script')
+            script.src = src
+
+            w.{{$areaId}} = () => {
+                new Map()
+            }
+
+            document.head.appendChild(script)
+
+        })('https://map.qq.com/api/js?v=2.exp&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77&callback={{$areaId}}');
     })(window, jQuery)
 </script>
