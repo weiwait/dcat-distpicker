@@ -5,7 +5,7 @@
     <div class="{{$viewClass['field']}}" id="{{$areaId}}">
         @include('admin::form.error')
 
-        <div class="clearfix mb-1">
+        <div class="clearfix">
             @if(isset($column[0]))
                 <div class="china-area-dropdown">
                     {{--                    <div>--}}
@@ -54,64 +54,65 @@
 
                     @if($value[$column[1]])
                         <select name="{{$column[1]}}" id="{{$areaId}}-city" class="custom-select">
-                    @else
-                        <select name="{{$column[1]}}" id="{{$areaId}}-city" class="custom-select" disabled>
-                    @endif
-                        <option selected>市</option>
-                        @if($value[$column[1]])
-                            @foreach($cities as $city)
-                                @if($city->code == $value[$column[1]])
-                                    <option value="{{$city->code}}" selected>{{$city->name}}</option>
-                                @elseif($city->pcode == $value[$column[0]])
-                                    <option value="{{$city->code}}">{{$city->name}}</option>
-                                @endif
-                            @endforeach
-                        @endif
-                    </select>
+                            @else
+                                <select name="{{$column[1]}}" id="{{$areaId}}-city" class="custom-select" disabled>
+                                    @endif
+                                    <option selected>市</option>
+                                    @if($value[$column[1]])
+                                        @foreach($cities as $city)
+                                            @if($city->code == $value[$column[1]])
+                                                <option value="{{$city->code}}" selected>{{$city->name}}</option>
+                                            @elseif($city->pcode == $value[$column[0]])
+                                                <option value="{{$city->code}}">{{$city->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
                 </div>
             @endif
             @if(isset($column[2]))
                 <div class="china-area-dropdown">
-{{--                    <div>--}}
-{{--                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"--}}
-{{--                                aria-expanded="false" id="{{$areaId}}-district-dropdown" disabled>--}}
-{{--                            区--}}
-{{--                        </button>--}}
-{{--                        <div class="dropdown-menu" aria-labelledby="district-menu" id="{{$areaId}}-district-menu">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
+                    {{--                    <div>--}}
+                    {{--                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"--}}
+                    {{--                                aria-expanded="false" id="{{$areaId}}-district-dropdown" disabled>--}}
+                    {{--                            区--}}
+                    {{--                        </button>--}}
+                    {{--                        <div class="dropdown-menu" aria-labelledby="district-menu" id="{{$areaId}}-district-menu">--}}
+                    {{--                        </div>--}}
+                    {{--                    </div>--}}
 
-{{--                    <input type="hidden" name="{{$column[2]}}" value="{{$value[$column[2]] ?? ''}}"--}}
-{{--                           id="{{$areaId}}-district">--}}
+                    {{--                    <input type="hidden" name="{{$column[2]}}" value="{{$value[$column[2]] ?? ''}}"--}}
+                    {{--                           id="{{$areaId}}-district">--}}
 
 
                     @if($value[$column[2]])
                         <select name="{{$column[2]}}" id="{{$areaId}}-district" class="custom-select">
-                    @else
-                        <select name="{{$column[2]}}" id="{{$areaId}}-district" class="custom-select" disabled>
-                    @endif
-                        <option selected>区</option>
-                        @if($value[$column[2]])
-                            @foreach($districts as $district)
-                                @if($district->code == $value[$column[2]])
-                                    <option value="{{$district->code}}" selected>{{$district->name}}</option>
-                                @elseif($district->pcode == $value[$column[1]])
-                                    <option value="{{$district->code}}">{{$district->name}}</option>
-                                @endif
-                            @endforeach
-                        @endif
-                    </select>
+                            @else
+                                <select name="{{$column[2]}}" id="{{$areaId}}-district" class="custom-select" disabled>
+                                    @endif
+                                    <option selected>区</option>
+                                    @if($value[$column[2]])
+                                        @foreach($districts as $district)
+                                            @if($district->code == $value[$column[2]])
+                                                <option value="{{$district->code}}"
+                                                        selected>{{$district->name}}</option>
+                                            @elseif($district->pcode == $value[$column[1]])
+                                                <option value="{{$district->code}}">{{$district->name}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
                 </div>
             @endif
 
-            @if($initCoordinate)
+            @if($enableCoordinate)
                 <div class="china-area-dropdown">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">纬度</span>
                         </div>
-                        <input id="{{$areaId}}-latitude" type="text" name="{{$latitude}}"
-                               value="{{$value[$latitude] ?? ''}}" class="form-control"
+                        <input id="{{$areaId}}-latitude" type="text" name="{{$latitudeColumn}}"
+                               value="{{$value[$latitudeColumn] ?? ''}}" class="form-control"
                                aria-label="纬度">
                     </div>
                 </div>
@@ -121,22 +122,22 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">经度</span>
                         </div>
-                        <input id="{{$areaId}}-longitude" type="text" name="{{$longitude}}"
-                               value="{{$value[$longitude] ?? ''}}" class="form-control"
+                        <input id="{{$areaId}}-longitude" type="text" name="{{$longitudeColumn}}"
+                               value="{{$value[$longitudeColumn] ?? ''}}" class="form-control"
                                aria-label="经度">
                     </div>
                 </div>
             @endif
         </div>
 
-        @if($initDetail)
+        @if($enableDetail)
             <div class="input-group mt-1">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">详细</span>
                 </div>
                 <input id="{{$areaId}}-detail-input" type="text" class="form-control"
-                       aria-label="Text input with dropdown button" name="{{$detail}}"
-                       value="{{$value[$detail] ?? ''}}">
+                       aria-label="Text input with dropdown button" name="{{$detailColumn}}"
+                       value="{{$value[$detailColumn] ?? ''}}">
                 <div class="input-group-append">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
                             aria-expanded="false">附近
@@ -146,19 +147,14 @@
                 </div>
             </div>
         @endif
+
+        @if(!$disableMap)
+            <div class="clearfix mt-1" id="{{$areaId}}-map"></div>
+        @endif
+
         @include('admin::form.help-block')
     </div>
 </div>
-
-<div class="{{$viewClass['form-group']}} {{ $class }}">
-
-    <label class="{{$viewClass['label']}} control-label"></label>
-
-    <div class="{{$viewClass['field']}}">
-        <div class="clearfix" id="{{$areaId}}-map"></div>
-    </div>
-</div>
-
 
 <style>
     .china-area-dropdown, .china-area-input {
@@ -176,7 +172,7 @@
 </style>
 <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=OB4BZ-D4W3U-B7VVO-4PJWW-6TKDJ-WPB77"></script>
 
-<script require="@weiwait.distpicker">
+<script>
     (function (w, $) {
         class Distpicker {
             provinces = @json($provinces);
@@ -184,8 +180,8 @@
             districts = @json($districts);
             currentCities = [];
             currentDistricts = [];
-            lat = {{$value[$latitude] ?: 39.916527}};
-            lng = {{$value[$longitude] ?: 116.397128}};
+            lat = {{$value[$latitudeColumn] ?? 39.916527}};
+            lng = {{$value[$longitudeColumn] ?? 116.397128}};
             areaProxy;
 
             constructor() {
@@ -306,7 +302,7 @@
                     this.addMarker(res.detail.latLng)
                 });
 
-                @if(!isset($value[$longitude]) || !$value[$longitude])
+                @if(!isset($value[$longitudeColumn]) || !$value[$longitudeColumn])
                     this.cityService.searchLocalCity();
                 @endif
 

@@ -7,7 +7,23 @@ use Weiwait\Distpicker\Models\ChinaArea;
 
 class Distpicker extends Field
 {
-    protected $view = 'weiwait.distpicker::index';
+    protected $view = 'weiwait.dcat-distpicker::index';
+
+    protected $height = 300; // 地图高度
+
+    protected $areaId = ''; // 模板id
+
+    protected $disableMap = false; // 关闭地图
+
+    protected $enableDetail = false; // 使用地址详细
+
+    protected $enableCoordinate = false; // 使用坐标
+
+    protected $detailColumn = ''; // 地址详细字段
+
+    protected $longitudeColumn = ''; // 经度字段
+
+    protected $latitudeColumn = ''; // 纬度字段
 
     public function __construct($column, $arguments = [])
     {
@@ -21,11 +37,9 @@ class Distpicker extends Field
         $cities = ChinaArea::cities();
         $districts = ChinaArea::districts();
 
-        $areaId = 'id' . md5(join('', $column));
+        $this->areaId = 'id' . md5(join('', $column));
 
-        $this->addVariables(compact('areaId', 'provinces', 'cities', 'districts'));
-
-        $this->addVariables(['initDetail' => false, 'initCoordinate' => false]);
+        $this->addVariables(compact( 'provinces', 'cities', 'districts'));
 
         $column = array_merge($column, ['longitude', 'latitude', 'detail']);
 
@@ -34,22 +48,48 @@ class Distpicker extends Field
 
     public function coordinate(array $lngLat): Distpicker
     {
-        $this->addVariables(['initCoordinate' => true, 'longitude' => $lngLat[0], 'latitude' => $lngLat[1]]);
+        $this->enableCoordinate = true;
+
+        $this->longitudeColumn = $lngLat[0];
+        $this->latitudeColumn = $lngLat[1];
 
         return $this;
     }
 
     public function detail(string $detail): Distpicker
     {
-        $this->addVariables(['initDetail' => true, 'detail' => $detail]);
+        $this->enableDetail = true;
+
+        $this->detailColumn = $detail;
 
         return $this;
     }
 
     public function height(int $height): Distpicker
     {
-        $this->addVariables(['height' => $height]);
+        $this->height = $height;
 
         return $this;
+    }
+
+    public function disableMap(bool $bool = true): Distpicker
+    {
+        $this->disableMap = $bool;
+
+        return $this;
+    }
+
+    public function defaultVariables(): array
+    {
+        return array_merge(parent::defaultVariables(), [
+            'height' => $this->height,
+            'areaId' => $this->areaId,
+            'enableDetail' => $this->enableDetail,
+            'detailColumn' => $this->detailColumn,
+            'enableCoordinate' => $this->enableCoordinate,
+            'longitudeColumn' => $this->longitudeColumn,
+            'latitudeColumn' => $this->latitudeColumn,
+            'disableMap' => $this->disableMap,
+        ]);
     }
 }
