@@ -41,14 +41,15 @@ class Distpicker extends Field
 
         $this->addVariables(compact( 'provinces', 'cities', 'districts'));
 
-        $column = array_merge($column, ['longitude', 'latitude', 'detail']);
-
         parent::__construct($column, $arguments);
     }
 
     public function coordinate(array $lngLat): Distpicker
     {
         $this->enableCoordinate = true;
+
+        $this->column[] = $lngLat[0];
+        $this->column[] = $lngLat[1];
 
         $this->longitudeColumn = $lngLat[0];
         $this->latitudeColumn = $lngLat[1];
@@ -59,6 +60,8 @@ class Distpicker extends Field
     public function detail(string $detail): Distpicker
     {
         $this->enableDetail = true;
+
+        $this->column[] = $detail;
 
         $this->detailColumn = $detail;
 
