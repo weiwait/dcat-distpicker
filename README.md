@@ -19,10 +19,10 @@
 
 ```php
     $form->distpicker(['province', 'city', 'district'], 'label')
-        ->deitail('detail') // 使用地址详细
+        ->detail('detail') // 使用地址详细
         ->coordinate(['longitude', 'latitude']) // 使用经度纬度坐标
         ->height(500) // 设置地图高度 默认300
-        ->disableMap() // 关闭地图
+        ->disableMap(); // 关闭地图
 ```
 
 ![示例图片](https://github.com/weiwait/images/blob/main/dcat-distpicker.png?raw=true)
